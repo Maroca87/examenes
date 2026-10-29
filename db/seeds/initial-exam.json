@@ -1,0 +1,685 @@
+{
+  "title": "Examen Técnico de Soporte Nivel 2 · Impresión",
+  "description": "Evaluación técnica inicial basada en el examen fuente. Incluye selección única, verdadero/falso, respuesta breve y casos de desarrollo.",
+  "durationMinutes": 90,
+  "version": "1.0",
+  "questions": [
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "Un usuario indica que no tiene Internet. Al revisar, puede hacer ping a 8.8.8.8 pero no a google.com, otros usuarios no presentan este síntoma. ¿Cuál es la causa más probable?",
+      "options": [
+        "Gateway incorrecto",
+        "Problema con el DNS",
+        "Cable de red defectuoso",
+        "DHCP caído"
+      ],
+      "answerKey": 1,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "Una computadora tarda 10 minutos en iniciar sesión en Windows 11. Otros usuarios no presentan el problema. ¿Qué investigarías primero?",
+      "options": [
+        "Estado de la fuente de poder",
+        "Perfil del usuario y recursos asociados al dominio",
+        "Estado de disco duro",
+        "Switch de acceso"
+      ],
+      "answerKey": 1,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "Un usuario no puede imprimir. Otros usuarios sí hacerlo usando la misma impresora. ¿Cuál sería tu primera validación?",
+      "options": [
+        "Reiniciar la impresora",
+        "Revisar la cola de impresión y configuración del usuario afectado",
+        "Cambiar la impresora",
+        "Cambiar el cable de red"
+      ],
+      "answerKey": 1,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "Un equipo se congela aleatoriamente. No hay datos ni errores visibles. ¿Cuál sería tu siguiente paso?",
+      "options": [
+        "Formatear",
+        "Recolectar eventos del sistema y evidencias",
+        "Hacer mantenimiento lógico al equipo",
+        "Cambiar SSD"
+      ],
+      "answerKey": 1,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "Un equipo puede hacer ping a otros equipos en la red local, pero no puede salir a internet. ¿Cuál es la capa del modelo OSI correcta según el enunciado anterior?",
+      "options": [
+        "Capa 3 – Red",
+        "Capa 2 – Enlace",
+        "Capa 4 – Transporte",
+        "Capa 7 – Aplicación"
+      ],
+      "answerKey": 0,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "Un usuario no puede acceder a un recurso compartido del dominio que esta compartido por su ip, pero hace 5 minutos si podía hacerlo, el usuario sí navega por Internet, ¿cuál puede ser el problema?",
+      "options": [
+        "DNS o autenticación de dominio",
+        "El file server esta inaccesible en el momento de la conexión del usuario",
+        "DHCP",
+        "Falta de permisos"
+      ],
+      "answerKey": 1,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "Después de cambiar una computadora de puesto físico deja de funcionar la red por cable. ¿Qué deberías validar primero?",
+      "options": [
+        "Reiniciar el equipo",
+        "Punto de red",
+        "Bloqueo en el antivirus",
+        "Windows Update"
+      ],
+      "answerKey": 1,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "Un usuario reporta que Outlook local no abre, no pasa de la pantalla inicial. Outlook Web funciona normalmente. ¿Cuál podría ser el problema?",
+      "options": [
+        "Problema de credenciales",
+        "Perfil local de Outlook defectuoso",
+        "Problema de Internet",
+        "Problema del servidor Exchange"
+      ],
+      "answerKey": 1,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "Un usuario no tiene conectividad de red. El cable está conectado, pero la luz del puerto del switch está apagada. ¿En qué capa del modelo OSI está el problema?",
+      "options": [
+        "Capa de enlace",
+        "Capa de red",
+        "Capa física",
+        "Capa de aplicación"
+      ],
+      "answerKey": 2,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "Un equipo obtiene IP 169.254.x.x. ¿Qué indica este comportamiento?",
+      "options": [
+        "Problema DNS",
+        "No recibió respuesta DHCP",
+        "Problema de Active Directory",
+        "Problema de asignación de Vlan"
+      ],
+      "answerKey": 1,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "Varias PCs presentan exactamente el mismo problema, no les funciona el bluetooth esto después de aplicar un parche de Microsoft. ¿Cuál sería tu principal sospecha?",
+      "options": [
+        "Falla simultánea de hardware",
+        "Actualización problemática",
+        "Problema de drivers",
+        "Bluetooth apagado"
+      ],
+      "answerKey": 1,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "¿Cuál de los siguientes comandos de Windows se utiliza para verificar la integridad de los archivos del sistema y reemplazar los dañados?",
+      "options": [
+        "chkdsk /f /r",
+        "sfc /scannow",
+        "bootrec /fixmbr",
+        "dism /online /cleanup-image /checkhealth"
+      ],
+      "answerKey": 1,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "En un entorno de red, ¿qué protocolo y puerto se utilizan principalmente para la resolución de nombres de dominio (DNS)?",
+      "options": [
+        "TCP 80",
+        "UDP 53 y TCP 53",
+        "UDP 67",
+        "TCP 443"
+      ],
+      "answerKey": 1,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "Cual es la máscara por defecto de una red clase B?",
+      "options": [
+        "255.255.255.0",
+        "255.255.0.0",
+        "255.255.255.255",
+        "255.0.0.0"
+      ],
+      "answerKey": 1,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "Un usuario reporta que su PC es lenta al abrir aplicaciones y transferir archivos. Al revisar, el disco es SATA SSD y otro equipo similar con NVMe es mucho más rápido. ¿Cuál es la diferencia principal entre ambos?",
+      "options": [
+        "El NVMe usa discos magnéticos de alta velocidad.",
+        "El SATA III se conecta directo al bus PCIe, haciéndolo más rápido.",
+        "El NVMe utiliza el bus PCIe, ofreciendo velocidades de lectura/escrituras significativamente mayores (miles de MB/s) frente al límite de ~600 MB/s de SATA III",
+        "No hay diferencia de velocidad, solo de tamaño físico."
+      ],
+      "answerKey": 2,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "Un usuario reporta que no puede acceder a una carpeta compartida en la red. El código de error hace referencia a problemas de resolución NetBIOS/SMB. ¿Qué puerto usa nativamente SMB sobre TCP/IP?",
+      "options": [
+        "445",
+        "139",
+        "21",
+        "3389"
+      ],
+      "answerKey": 0,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "Al ejecutar 'gpupdate /force' en un equipo cliente, ¿qué acción se está realizando?",
+      "options": [
+        "Forzar la actualización del sistema operativo Windows.",
+        "Solicitar de inmediato la aplicación de las Políticas de Grupo (GPO) del dominio",
+        "Actualizar la tabla de enrutamiento local.",
+        "Sincronizar la hora del equipo con el servidor NTP."
+      ],
+      "answerKey": 1,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "¿Qué comando de consola muestra las conexiones de red activas, los puertos a la escucha y el identificador de proceso (PID) asociado en Windows?",
+      "options": [
+        "netstat -ano",
+        "ipconfig /all",
+        "route print",
+        "nbtstat -R"
+      ],
+      "answerKey": 0,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "Si una dirección IP tiene una máscara de subred 255.255.255.0 (o /24), ¿cuántas direcciones IP de host utilizables hay en esa subred?",
+      "options": [
+        "256",
+        "255",
+        "254",
+        "128"
+      ],
+      "answerKey": 2,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "Tienes un servidor con 4 discos duros y necesitas tolerancia a fallos donde puedas perder un disco sin perder datos, además de mejorar la velocidad de lectura. ¿Qué nivel de RAID es el estándar en este caso?",
+      "options": [
+        "RAID 0",
+        "RAID 1",
+        "RAID 5",
+        "JBOD"
+      ],
+      "answerKey": 2,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "¿Cuál es la función del registro 'MX' en una zona DNS?",
+      "options": [
+        "Traducir un nombre de dominio a una dirección IPv6",
+        "Apuntar un nombre de dominio a otro nombre de dominio (Alias)",
+        "Indicar los servidores responsables de recibir el correo electrónico para ese dominio",
+        "Validar el certificado SSL del sitio web"
+      ],
+      "answerKey": 2,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "Un usuario quiere ampliar la memoria de su laptop moderna. Al comprar la RAM, notas que la muesca de los pines está en una posición diferente a la de la placa. ¿A qué se debe esto?",
+      "options": [
+        "Es una memoria ECC para servidores.",
+        "Está intentando instalar un módulo DDR4 en una ranura DDR5 (o viceversa)",
+        "La memoria está defectuosa de fábrica.",
+        "La laptop solo acepta memoria soldada."
+      ],
+      "answerKey": 1,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "Un switch envía energía eléctrica además de datos a través de un cable Ethernet para encender un teléfono IP. ¿Qué estándar define esta tecnología?",
+      "options": [
+        "802.1Q",
+        "802.3af / 802.3at",
+        "802.11ax",
+        "802.1X"
+      ],
+      "answerKey": 1,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "Necesitas ver la ruta completa de saltos (routers) que toma un paquete desde tu PC hasta un servidor web o destino especifico, y además medir la pérdida de paquetes en cada salto. ¿Qué comando ofrece esto en Windows?",
+      "options": [
+        "ping",
+        "tracert",
+        "pathping",
+        "nslookup"
+      ],
+      "answerKey": 1,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "Si un equipo en un dominio Active Directory muestra el error 'La relación de confianza entre esta estación de trabajo y el dominio principal falló', ¿qué comando en PowerShell puede intentar reparar la relación sin sacar el equipo del dominio?",
+      "options": [
+        "Reset-ComputerMachinePassword",
+        "Test-ComputerSecureChannel -Repair",
+        "gpupdate /force /sync",
+        "netdom resetpwd"
+      ],
+      "answerKey": 1,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "¿Qué componente físico es responsable de mantener la configuración de la BIOS/UEFI y el reloj del sistema en tiempo real (RTC) cuando el equipo está desconectado de la corriente?",
+      "options": [
+        "El chipset puente sur.",
+        "La memoria caché L3 del procesador.",
+        "La batería CMOS",
+        "El chip TPM."
+      ],
+      "answerKey": 2,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "En la gestión de discos de Windows (diskmgmt.msc), ¿qué significa inicializar un disco con la tabla de particiones GPT en lugar de MBR?",
+      "options": [
+        "Que el disco solo podrá usarse en Linux.",
+        "Que soportará particiones mayores a 2 TB y un número casi ilimitado de particiones primarias",
+        "Que el disco se encriptará automáticamente.",
+        "Que el disco será compatible con sistemas BIOS heredados de 32 bits."
+      ],
+      "answerKey": 1,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "¿Cuál es la diferencia fundamental entre IMAP y POP3?",
+      "options": [
+        "POP3 descarga los correos al cliente local y (generalmente) la borra del servidor; IMAP sincroniza los correos manteniendo la copia maestra en el servidor",
+        "POP3 es para enviar correos, IMAP es para recibirlos",
+        "POP3 soporta cifrado TLS, IMAP no",
+        "IMAP solo funciona en dispositivos móviles"
+      ],
+      "answerKey": 0,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "¿Qué utilidad gráfica integrada permite analizar el uso de CPU, Memoria, Disco y Red en tiempo real con gran nivel de detalle por proceso?",
+      "options": [
+        "Visor de Eventos",
+        "Monitor de Recursos",
+        "Información del Sistema",
+        "Editor del Registro"
+      ],
+      "answerKey": 1,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "Para borrar la caché de resolución DNS local en un equipo Windows, el comando correcto es:",
+      "options": [
+        "ipconfig /release",
+        "ipconfig /renew",
+        "ipconfig /flushdns",
+        "ipconfig /registerdns"
+      ],
+      "answerKey": 2,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "¿Qué significa el término 'VLAN Tagging' (Etiquetado VLAN, estándar 802?1Q)?",
+      "options": [
+        "Asignar un nombre amigable a un puerto del switch.",
+        "Insertar un identificador en la cabecera de la trama Ethernet para que el tráfico de múltiples VLANs pueda viajar por un mismo enlace troncal (Trunk)",
+        "Bloquear direcciones MAC no autorizadas en un puerto.",
+        "Enviar el tráfico de red por dos cables al mismo tiempo para redundancia."
+      ],
+      "answerKey": 1,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "¿Qué práctica mejora más la seguridad de cuentas críticas?",
+      "options": [
+        "Cambiar contraseña cada 5 años",
+        "Usar solo contraseña compleja",
+        "Activar MFA",
+        "Usar correo personal"
+      ],
+      "answerKey": 2,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "¿Cuál es la función principal de un switch?",
+      "options": [
+        "Conectar redes diferentes",
+        "Conectar dispositivos dentro de la misma red",
+        "Proveer internet inalámbrico",
+        "Asignar direcciones IP"
+      ],
+      "answerKey": 1,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "¿Cuál es la función principal de un router?",
+      "options": [
+        "Conectar dispositivos locales",
+        "Filtrar tráfico interno",
+        "Interconectar redes diferentes",
+        "Amplificar señal WiFi"
+      ],
+      "answerKey": 2,
+      "points": 1
+    },
+    {
+      "section": "Selección única",
+      "type": "choice",
+      "prompt": "¿Qué hace un Access Point (AP)?",
+      "options": [
+        "Asigna IP automáticamente",
+        "Convierte señal cableada en inalámbrica",
+        "Filtra paquetes por puerto",
+        "Conecta VLANs"
+      ],
+      "answerKey": 1,
+      "points": 1
+    },
+    {
+      "section": "Verdadero o Falso",
+      "type": "boolean",
+      "prompt": "Un resultado de 'Tiempo de espera agotado' (Request timed out) al hacer un ping continuo a un servidor interno siempre es indicativo de que el servidor está apagado o desconectado de la red físicamente.",
+      "options": [
+        "Verdadero",
+        "Falso"
+      ],
+      "answerKey": false,
+      "points": 1
+    },
+    {
+      "section": "Verdadero o Falso",
+      "type": "boolean",
+      "prompt": "Si un usuario es eliminado por accidente en Active Directory (AD) y creas inmediatamente una cuenta nueva con exactamente el mismo nombre de usuario, contraseña y grupos, el usuario recuperará automáticamente el acceso a sus carpetas de red protegidas.",
+      "options": [
+        "Verdadero",
+        "Falso"
+      ],
+      "answerKey": false,
+      "points": 1
+    },
+    {
+      "section": "Verdadero o Falso",
+      "type": "boolean",
+      "prompt": "Realizar una desfragmentación manual y frecuente en un disco de estado sólido (SSD) utilizando las herramientas nativas del sistema operativo ayuda a alargar la vida útil del componente y mejora los tiempos de lectura.",
+      "options": [
+        "Verdadero",
+        "Falso"
+      ],
+      "answerKey": false,
+      "points": 1
+    },
+    {
+      "section": "Verdadero o Falso",
+      "type": "boolean",
+      "prompt": "Aumentar la ram siempre mejora el rendimiento del sistema?",
+      "options": [
+        "Verdadero",
+        "Falso"
+      ],
+      "answerKey": false,
+      "points": 1
+    },
+    {
+      "section": "Verdadero o Falso",
+      "type": "boolean",
+      "prompt": "En el sistema de permisos NTFS de Windows, si un usuario pertenece a un grupo que tiene permisos de 'Permitir Control Total' sobre una carpeta, pero a su usuario individual se le asigna explícitamente la regla 'Denegar Lectura', el usuario NO podrá leer los archivos de esa carpeta.",
+      "options": [
+        "Verdadero",
+        "Falso"
+      ],
+      "answerKey": true,
+      "points": 1
+    },
+    {
+      "section": "Verdadero o Falso",
+      "type": "boolean",
+      "prompt": "Cuando se configura una cuenta de correo electrónico en un cliente (como Outlook) usando el protocolo IMAP, si el usuario elimina de forma permanente un correo en su bandeja de entrada local, dicho correo permanecerá intacto e inalterado en el servidor web de correo.",
+      "options": [
+        "Verdadero",
+        "Falso"
+      ],
+      "answerKey": false,
+      "points": 1
+    },
+    {
+      "section": "Verdadero o Falso",
+      "type": "boolean",
+      "prompt": "Si un equipo de escritorio emite una secuencia rápida y constante de pitidos cortos inmediatamente después de presionar el botón de encendido y no da video, el hardware que más probablemente está fallando es el disco duro mecánico.",
+      "options": [
+        "Verdadero",
+        "Falso"
+      ],
+      "answerKey": false,
+      "points": 1
+    },
+    {
+      "section": "Verdadero o Falso",
+      "type": "boolean",
+      "prompt": "En cable de red UTP de Categoría 5e (Cat 5e), si está correctamente ponchado, es capaz de soportar conexiones y velocidades de hasta 1 Gbps (Gigabit Ethernet) en distancias típicas de oficina (hasta 100 metros).",
+      "options": [
+        "Verdadero",
+        "Falso"
+      ],
+      "answerKey": true,
+      "points": 1
+    },
+    {
+      "section": "Verdadero o Falso",
+      "type": "boolean",
+      "prompt": "El comando de Windows 'gpupdate /force' requiere obligatoriamente que el equipo se reinicie cada vez que se ejecuta para que cualquier cambio en las políticas de grupo (GPO) de la red tome efecto en el sistema del usuario.",
+      "options": [
+        "Verdadero",
+        "Falso"
+      ],
+      "answerKey": false,
+      "points": 1
+    },
+    {
+      "section": "Verdadero o Falso",
+      "type": "boolean",
+      "prompt": "En switches administrables, configurar un puerto en modo 'Acceso' (Access Mode) está diseñado para enviar tráfico etiquetado (Tagged) de múltiples VLANs hacia el equipo final del usuario simultáneamente.",
+      "options": [
+        "Verdadero",
+        "Falso"
+      ],
+      "answerKey": false,
+      "points": 1
+    },
+    {
+      "section": "Respuesta breve",
+      "type": "short",
+      "prompt": "Un usuario imprime un documento PDF y la impresora imprime decenas de hojas con símbolos extraños, caritas y texto basura. ¿Cuál es la causa habitual y cómo lo detienes y solucionas de manera rápida y eficiente?",
+      "options": null,
+      "answerKey": null,
+      "points": 2
+    },
+    {
+      "section": "Respuesta breve",
+      "type": "short",
+      "prompt": "Un usuario se queja de que al buscar correos de ayer en Outlook (versión de escritorio), dice 'Buscando...' pero no arroja resultados, aunque los correos están en la bandeja. ¿Cuál es el paso a paso para repararlo?",
+      "options": null,
+      "answerKey": null,
+      "points": 2
+    },
+    {
+      "section": "Respuesta breve",
+      "type": "short",
+      "prompt": "El equipo de un usuario muestra un Pantallazo Azul con el código 'INACCESSIBLE_BOOT_DEVICE' justo después de instalar actualizaciones de Windows y reiniciar. ¿Qué acción tomas en el entorno de recuperación de Windows o indique que pasos tomaría para intentar solucionar la problematica?",
+      "options": null,
+      "answerKey": null,
+      "points": 2
+    },
+    {
+      "section": "Respuesta breve",
+      "type": "short",
+      "prompt": "Al conectar una memoria USB, suena el clásico tono de Windows de hardware conectado, pero no aparece ninguna letra de unidad en 'Este Equipo'. En el Administrador de Discos sí aparece, pero sin letra. ¿Qué haces?",
+      "options": null,
+      "answerKey": null,
+      "points": 2
+    },
+    {
+      "section": "Respuesta breve",
+      "type": "short",
+      "prompt": "Un usuario se queja de que su laptop se descarga en la mochila aunque la 'apague'. Revisas y notaste que al presionar 'Apagar', Windows realmente entra en hibernación híbrida. ¿Qué característica de Windows debes desactivar desde las Opciones de Energía?",
+      "options": null,
+      "answerKey": null,
+      "points": 2
+    },
+    {
+      "section": "Respuesta breve",
+      "type": "short",
+      "prompt": "Un programa de facturación antiguo requiere permisos de Administrador para ejecutarse, pero por políticas de la empresa, el usuario debe ser Estándar. ¿Cómo permites que el usuario ejecute SOLO esa aplicación sin darle la contraseña de admin ni volverlo administrador local?",
+      "options": null,
+      "answerKey": null,
+      "points": 2
+    },
+    {
+      "section": "Respuesta breve",
+      "type": "short",
+      "prompt": "Un usuario reporta que al buscar en Google desde Google Chrome, los resultados lo redirigen a páginas extrañas con publicidad, que pasos tomarias para resolver la problematica?",
+      "options": null,
+      "answerKey": null,
+      "points": 2
+    },
+    {
+      "section": "Respuesta breve",
+      "type": "short",
+      "prompt": "Te reportan: 'El micrófono no funciona en Microsoft Teams o Zoom'. Sin embargo, vas a la configuración de sonido de Windows y ves que la barra verde se mueve cuando el usuario habla. ¿Qué ajuste de privacidad de Windows 10/11 está bloqueando esto?",
+      "options": null,
+      "answerKey": null,
+      "points": 2
+    },
+    {
+      "section": "Respuesta breve",
+      "type": "short",
+      "prompt": "Un usuario de Recursos Humanos intenta abrir un archivo de Excel desde la red, pero aparece un mensaje: 'El archivo está bloqueado para edición por [Nombre del mismo usuario]'. El usuario asegura que ya cerró Excel. ¿Cómo liberas el archivo desde el servidor de archivos (File Server)?",
+      "options": null,
+      "answerKey": null,
+      "points": 2
+    },
+    {
+      "section": "Respuesta breve",
+      "type": "short",
+      "prompt": "Un usuario no puede iniciar sesión en una app interna, pero sus credenciales funcionan en otras plataformas (correo, VPN, etc.). Que puede estar pasando?",
+      "options": null,
+      "answerKey": null,
+      "points": 2
+    },
+    {
+      "section": "Casos de desarrollo",
+      "type": "development",
+      "prompt": "ESCENARIO #1: Te encuentras realizando un mantenimiento preventivo programado a la laptop corporativa del Gerente de Finanzas (limpieza física, cambio de pasta térmica y optimización de software). Durante el proceso, aplicas una actualización crítica de la BIOS sugerido por la herramienta oficial del fabricante. El flasheo de la BIOS finaliza con éxito al 100%. Sin embargo, al reiniciarse el equipo para entregarlo, el sistema operativo no carga y no muestra ningún mensaje de error ni pantallazo azul. La laptop simplemente se queda en una pantalla negra con un cursor parpadeando, o se cicla entrando directamente al menú de la BIOS una y otra vez, como si el disco estuviera completamente vacío. Al consultar de inmediato con el Gerente, este te confirma con urgencia que no tiene respaldada la información más reciente (estados financieros del mes y aplicativos con firmas digitales activas). Tienes los manuales para reinstalar todo desde cero, pero al tratarse de un equipo de alta gerencia, formatear o reinstalar el sistema operativo requiere un proceso de aprobación formal de la Dirección de TI que tardará 24 horas, un tiempo que el usuario no puede esperar debido a una auditoría activa el día de hoy.\n\nInstrucción: Describe detalladamente tu plan de acción y los pasos cronológicos que seguirías para brindar una solución oportuna y definitiva al Gerente en el menor tiempo posible. Tu respuesta debe justificar técnicamente qué vas a hacer primero, cómo vas a asegurar los datos sin alterar el disco y cómo reconfigurarías el equipo para evitar el proceso de aprobación de 24 horas.",
+      "options": null,
+      "answerKey": null,
+      "points": 2
+    },
+    {
+      "section": "Casos de desarrollo",
+      "type": "development",
+      "prompt": "ESCENARIO #2: Un usuario de la oficina te reporta que su laptop aparece 'Conectada' a la red Wi-Fi corporativa y muestra todas las barras de señal al máximo. Sin embargo, no puede navegar en páginas web, enviar correos ni conectar sus aplicaciones. El ícono de red en Windows no muestra alertas y otros compañeros navegan perfectamente en el mismo Access Point. La infraestructura de la empresa cuenta con un servidor local que gestiona el DHCP y el DNS, y toda la salida a internet pasa obligatoriamente por un equipo perimetral (Firewall / UTM) de la empresa, el cual aplica políticas de filtrado web, inspección de tráfico y control de accesos.\n\nInstrucción: Tomando en cuenta que la conexión física inalámbrica es correcta pero no hay navegación, y sabiendo que la empresa cuenta con un Firewall Perimetral, describe detalladamente tu proceso de diagnóstico. Justifica cómo descartarías paso a paso si el problema es un fallo local de asignación de red (DHCP/Gateway), un error de resolución de nombres (DNS) o si el equipo perimetral (Firewall) está bloqueando o aislando el tráfico de esta laptop específica, y detalla cómo lo solucionarías.",
+      "options": null,
+      "answerKey": null,
+      "points": 2
+    },
+    {
+      "section": "Casos de desarrollo",
+      "type": "development",
+      "prompt": "ESCENARIO #3: Un directivo te llama muy enojado el lunes a primera hora. Te dice: 'Acabo de iniciar sesión en mi computadora de escritorio del corporativo y mi fondo de pantalla desapareció, mis iconos no están, mis documentos de la carpeta Escritorio no están y me sale un mensaje de que inicié con un perfil temporal'. El directivo tenía una presentación vital en su Escritorio que no estaba respaldada en OneDrive.\n\nInstrucción: Explica a detalle cuál es la causa a nivel de sistema operativo de este comportamiento, dónde se encuentra físicamente la carpeta del perfil original del usuario (para recuperar su presentación de inmediato), y qué claves del Editor del Registro (Regedit) debes manipular para obligar a Windows a recrear/restaurar el perfil correctamente.",
+      "options": null,
+      "answerKey": null,
+      "points": 2
+    },
+    {
+      "section": "Casos de desarrollo",
+      "type": "development",
+      "prompt": "ESCENARIO 4: Todo el piso 4 del edificio corporativo pierde conexión a la red de forma intermitente. Los usuarios reportan que la red 'va lenta', luego se corta, y vuelve a funcionar. Al hacer un ping continuo (ping -t) al router de salida, observas que responde bien por 30 segundos, luego los tiempos suben a 2000ms y arroja 'Tiempo de espera agotado' por 1 minuto, repitiendo el ciclo. Las luces de todos los puertos del Switch principal del piso 4 están parpadeando a una velocidad frenética y simultánea. Sabes que en ese piso los usuarios suelen conectar pequeños switches no administrables bajo sus escritorios para conectar impresoras y laptops.\n\nInstrucción: Explica qué fenómeno de red está ocurriendo. Detalla tu metodología para encontrar físicamente el origen del problema si el switch principal no es administrable. Finalmente, si pudieras reemplazar el switch principal por uno administrable, ¿qué protocolo o configuración habilitarías para prevenir esto de por vida?",
+      "options": null,
+      "answerKey": null,
+      "points": 2
+    }
+  ]
+}
