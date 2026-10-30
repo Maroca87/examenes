@@ -1,38 +1,34 @@
-# Examena · Plataforma de exámenes técnicos
+# Examena · despliegue gratuito en Cloudflare
 
-Aplicación web con servidor Node.js y PostgreSQL. El cliente y la API se sirven desde el mismo origen; GitHub Pages por sí solo no puede ejecutar el backend. La estructura está preparada para desplegarse como servicio web y base PostgreSQL en Railway.
+La plataforma usa GitHub como repositorio y Cloudflare Pages Functions + D1 Free para servir la web, ejecutar la API y guardar datos. GitHub Pages no ejecuta Functions; el portal para candidatos será la URL `*.pages.dev` que asigne Cloudflare. No hay correo de resultados en esta primera fase.
 
-## Roles y reglas
+## Preparación local
 
-- **Superadministrador:** control de usuarios y roles, exámenes, reportes, estadísticas, bitácora, respaldos, revisión y liberación de resultados.
-- **Administrador:** crea y edita exámenes, asigna evaluaciones, administra candidatos y califica entregas; no puede borrar usuarios ni publicar el resultado al candidato.
-- **Candidato:** accede a sus exámenes asignados, responde, entrega y descarga el informe cuando el superadministrador lo libera.
-- Selección única y verdadero/falso: 1 punto por respuesta correcta.
-- Respuesta breve y desarrollo: calificación manual de 0 **Mejorable**, 1 **Bueno** o 2 **Muy Bueno**.
-- Los cambios a preguntas se bloquean después de que existan entregas; se debe duplicar el examen para conservar el historial.
+- Pages Functions atiende las rutas `/api/*` en `functions/api/[[path]].js`.
+- D1 crea su esquema y carga el examen en el primer acceso.
+- El primer superadministrador y las claves objetivas se configuran como secretos de Pages. El archivo `.dev.vars` local conserva las claves del examen y está excluido de Git.
+- No subas `.dev.vars`, `.env` ni archivos de respaldo al repositorio.
 
-## Ejecutar localmente
+## Configurar Cloudflare en el plan Free
 
-Requisitos: Node.js 20+ y PostgreSQL.
+1. Crea una cuenta gratuita de Cloudflare.
+2. Ve a **Workers & Pages → Create application → Pages → Connect to Git** y autoriza el repositorio `maroca87/examenes`.
+3. Configura el comando de build `node build-site.mjs` y el directorio de salida `dist`. Cloudflare detectará la carpeta `functions/` en la raíz; los archivos antiguos de Node/PostgreSQL quedarán fuera del sitio público.
+4. Crea una base D1 gratuita con el nombre `examena`.
+5. En el proyecto Pages, abre **Settings → Functions → D1 database bindings** y agrega el binding `DB` apuntando a `examena` (en producción y preview si se usan ambos).
+6. En **Settings → Variables and Secrets**, agrega `SUPERADMIN_USERNAME`, `SUPERADMIN_PASSWORD` (12–128 caracteres), `SUPERADMIN_NAME` y `EXAM_ANSWER_KEYS`. Marca contraseñas y respuestas como secretos. Copia las respuestas desde la línea `EXAM_ANSWER_KEYS` del archivo local `.dev.vars`; no lo subas a GitHub.
+7. Guarda y vuelve a desplegar. El primer acceso crea tablas, cuenta superadmin y borrador del examen.
 
-1. Crea una base PostgreSQL y copia `.env.example` a `.env`.
-2. Configura `DATABASE_URL`, `SUPERADMIN_USERNAME`, `SUPERADMIN_PASSWORD` (entre 12 y 128 caracteres) y `SUPERADMIN_NAME`.
-3. Ejecuta `npm install` y luego `npm start`.
-4. Abre `http://localhost:3000`. En el primer inicio se ejecutan las migraciones y se crea el superadministrador inicial.
+El inicio de sesión no funcionará hasta que el binding `DB` y esos secretos estén configurados. No uses la URL de GitHub Pages para candidatos; usa la URL `pages.dev` del proyecto Cloudflare, que sirve interfaz y API desde el mismo origen.
 
-No subas `.env` ni la carpeta `data/` al repositorio.
+## Cuotas y respaldos sin costo
 
-## Despliegue en Railway
+Workers Free permite hasta 100.000 solicitudes al día. D1 Free incluye 5 millones de filas leídas y 100.000 escritas al día; una base individual puede crecer hasta 500 MB. Si se alcanzan límites gratuitos, las solicitudes de base de datos fallan hasta el reinicio de la cuota; no se requiere actualizar a un plan pagado. [Límites de Workers](https://developers.cloudflare.com/workers/platform/limits/) · [Límites de D1](https://developers.cloudflare.com/d1/platform/limits/) · [Cuotas gratuitas de D1](https://developers.cloudflare.com/d1/reference/faq/)
 
-1. Crea un servicio desde tu repositorio y agrega el plugin/servicio PostgreSQL.
-2. En el servicio web configura `DATABASE_URL` como referencia a la variable `DATABASE_URL` del servicio PostgreSQL, además de `NODE_ENV=production`, `SUPERADMIN_USERNAME`, `SUPERADMIN_PASSWORD` (entre 12 y 128 caracteres) y `SUPERADMIN_NAME`.
-3. Agrega un volumen al servicio web montado en `/data` y configura `BACKUP_DIR=/data/backups` y `BACKUP_KEEP_DAYS=30`.
-4. Railway ejecutará `npm start`; al iniciar se aplican las migraciones y se crea la primera cuenta superadmin.
+D1 conserva recuperación a un punto en el tiempo durante 7 días en el plan Free. La sección Respaldos permite exportar y restaurar una copia JSON manual; la recuperación automática se opera desde el panel de Cloudflare. Guarda exportaciones manuales fuera de GitHub y Cloudflare.
 
-Mantén el gasto mensual dentro del límite de facturación elegido en Railway. Los respaldos de aplicación viven en el volumen configurado; para recuperación ante pérdida de la cuenta/infraestructura, descarga periódicamente copias fuera de Railway.
+El informe final se genera como PDF al descargarlo, después de que el superadministrador libera el resultado. No se envían correos.
 
 ## Examen inicial
 
-En el primer inicio, el sistema carga como borrador **Examen Técnico de Soporte Nivel 2 · Impresión** con 59 preguntas y sus respuestas objetivas: 35 de selección única, 10 de verdadero/falso, 10 de respuesta breve y 4 casos de desarrollo. La duración inicial quedó en 90 minutos y es editable. El documento fuente indica “3 casos” en el encabezado, pero contiene cuatro escenarios y se conservaron los cuatro. La calificación máxima es 73 puntos (45 objetivos y 28 abiertos); cada respuesta breve y cada caso se califica con hasta 2 puntos.
-
-La carga se registra una sola vez en la base de datos. El superadministrador o administrador puede revisar y editar el borrador y publicarlo cuando esté listo.
+Se carga como borrador el examen de Soporte Nivel 2 · Impresión, con 59 preguntas: 35 de selección única, 10 verdadero/falso, 10 breves y 4 casos de desarrollo. El documento decía “3 casos” en el encabezado, pero incluía cuatro escenarios. El máximo es 73 puntos; cada respuesta abierta vale 0 Mejorable, 1 Bueno o 2 Muy Bueno. La duración inicial es 90 minutos y se puede editar.
