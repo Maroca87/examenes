@@ -14,6 +14,7 @@ La plataforma usa GitHub como repositorio y Cloudflare Pages Functions + D1 Free
 1. Crea una cuenta gratuita de Cloudflare.
 2. Ve a **Workers & Pages → Create application → Pages → Connect to Git** y autoriza el repositorio `maroca87/examenes`.
 3. Configura el comando de build `node build-site.mjs` y el directorio de salida `dist`. Cloudflare detectará la carpeta `functions/` en la raíz; los archivos antiguos de Node/PostgreSQL quedarán fuera del sitio público.
+   `wrangler.jsonc` se conserva para desarrollo local. No agregues `pages_build_output_dir` mientras los bindings D1 y los secretos de producción se administren desde el panel de Cloudflare; al incluir esa propiedad, Wrangler pasa a ser la fuente de configuración de Pages.
 4. Crea una base D1 gratuita con el nombre `examena`.
 5. En el proyecto Pages, abre **Settings → Functions → D1 database bindings** y agrega el binding `DB` apuntando a `examena` (en producción y preview si se usan ambos).
 6. En **Settings → Variables and Secrets**, agrega `SUPERADMIN_USERNAME`, `SUPERADMIN_PASSWORD` (12–128 caracteres), `SUPERADMIN_NAME` y `EXAM_ANSWER_KEYS`. Marca contraseñas y respuestas como secretos. Copia las respuestas desde la línea `EXAM_ANSWER_KEYS` del archivo local `.dev.vars`; no lo subas a GitHub.
