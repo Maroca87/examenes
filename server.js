@@ -62,6 +62,12 @@ const needText = (value, label, max = 3000) => {
   if (!out || out.length > max) throw Object.assign(new Error(`${label} es obligatorio y debe tener ${max} caracteres o menos.`), { status:400 });
   return out;
 };
+function validateQuestionInput(body,type){
+  if(!['choice','boolean','short','development'].includes(type))return {error:'Tipo de pregunta inválido.'};
+  if(type==='choice'){if(!Array.isArray(body.options)||body.options.length<2||body.options.length>6||body.options.some(value=>typeof value!=='string'||!value.trim())||!Number.isInteger(Number(body.answerKey))||Number(body.answerKey)<0||Number(body.answerKey)>=body.options.length)return {error:'La pregunta de selección requiere de 2 a 6 opciones y una respuesta correcta válida.'};return {options:body.options,key:Number(body.answerKey)}}
+  if(type==='boolean'){if(typeof body.answerKey!=='boolean')return {error:'Indica la respuesta correcta verdadero/falso.'};return {options:null,key:body.answerKey}}
+  return {options:null,key:null};
+}
 const roleIn = (...roles) => req => roles.includes(req.user.role);
 
 async function migrate() {
@@ -273,18 +279,19 @@ async function route(req, res) {
   const questionMatch=p.match(/^\/api\/exams\/([\da-f-]+)\/questions$/i);
   if(questionMatch&&method==='GET'){
     const exam=questionMatch[1];if(user.role==='candidate'&&!(await query("SELECT 1 FROM exam_assignments a JOIN exams e ON e.id=a.exam_id WHERE a.exam_id=$1 AND a.candidate_id=$2 AND e.status='published'",[exam,user.id])).rowCount)return fail(res,403,'Este examen no está asignado a tu cuenta.');
-    const rows=(await query('SELECT id,exam_id,section,type,prompt,options,points,position FROM questions WHERE exam_id=$1 ORDER BY position,id',[exam])).rows;return json(res,200,{questions:rows});
+    const columns=user.role==='candidate'?'id,exam_id,section,type,prompt,options,points,position':'id,exam_id,section,type,prompt,options,answer_key,points,position';
+    const rows=(await query(`SELECT ${columns} FROM questions WHERE exam_id=$1 ORDER BY position,id`,[exam])).rows;
+    return json(res,200,{questions:rows.map(q=>({...q,options:q.options==null?null:(typeof q.options==='string'?JSON.parse(q.options):q.options),...(user.role==='candidate'?{}:{answer_key:q.answer_key==null?null:(typeof q.answer_key==='string'?JSON.parse(q.answer_key):q.answer_key)})}))});
   }
   if(questionMatch&&method==='POST'){
-    if(!['superadmin','admin'].includes(user.role))return fail(res,403,'Sin permiso.');const b=await readBody(req),type=String(b.type||''),prompt=needText(b.prompt,'El enunciado',5000),points=['short','development'].includes(type)?2:1;if(!['choice','boolean','short','development'].includes(type))return fail(res,400,'Tipo de pregunta inválido.');
-    let key=b.answerKey;if(type==='choice'&&(!Array.isArray(b.options)||b.options.length<2||b.options.length>6||!Number.isInteger(Number(key))))return fail(res,400,'La pregunta de selección requiere opciones y una respuesta correcta.');if(type==='boolean'&&typeof key!=='boolean')return fail(res,400,'Indica la respuesta correcta verdadero/falso.');if(type==='short'||type==='development')key=null;
-    const result=await query('INSERT INTO questions(exam_id,section,type,prompt,options,answer_key,points,position) VALUES($1,$2,$3,$4,$5,$6,$7,$8) RETURNING id,exam_id,section,type,prompt,options,points,position',[questionMatch[1],String(b.section||'General').slice(0,120),type,prompt,b.options?JSON.stringify(b.options):null,key==null?null:JSON.stringify(key),points,Number(b.position||0)]);await audit(req,'question_created','exam',questionMatch[1]);return json(res,201,{question:result.rows[0]});
+    if(!['superadmin','admin'].includes(user.role))return fail(res,403,'Sin permiso.');const b=await readBody(req),type=String(b.type||''),prompt=needText(b.prompt,'El enunciado',5000),points=['short','development'].includes(type)?2:1,checked=validateQuestionInput(b,type);if(checked.error)return fail(res,400,checked.error);const {key,options}=checked;
+    const result=await query('INSERT INTO questions(exam_id,section,type,prompt,options,answer_key,points,position) VALUES($1,$2,$3,$4,$5,$6,$7,$8) RETURNING id,exam_id,section,type,prompt,options,points,position',[questionMatch[1],String(b.section||'General').slice(0,120),type,prompt,options==null?null:JSON.stringify(options),key==null?null:JSON.stringify(key),points,Number(b.position||0)]);await audit(req,'question_created','exam',questionMatch[1]);return json(res,201,{question:result.rows[0]});
   }
   const oneQuestion=p.match(/^\/api\/questions\/([\da-f-]+)$/i);
   if(oneQuestion&&(method==='PATCH'||method==='DELETE')){
     if(!['superadmin','admin'].includes(user.role))return fail(res,403,'Sin permiso.');const question=(await query('SELECT * FROM questions WHERE id=$1',[oneQuestion[1]])).rows[0];if(!question)return fail(res,404,'Pregunta no encontrada.');if((await query('SELECT 1 FROM attempts WHERE exam_id=$1 LIMIT 1',[question.exam_id])).rowCount)return fail(res,409,'El examen ya tiene entregas. Duplica el examen para editar esta pregunta sin alterar el historial.');
     if(method==='DELETE'){await query('DELETE FROM questions WHERE id=$1',[question.id]);await audit(req,'question_deleted','question',question.id);return json(res,200,{ok:true})}
-    const b=await readBody(req),type=String(b.type||question.type);if(!['choice','boolean','short','development'].includes(type))return fail(res,400,'Tipo inválido.');const key=(type==='choice'||type==='boolean')?b.answerKey: null;if(type==='choice'&&(!Array.isArray(b.options)||!Number.isInteger(Number(key))))return fail(res,400,'Opciones y respuesta correcta son obligatorias.');if(type==='boolean'&&typeof key!=='boolean')return fail(res,400,'Respuesta correcta verdadero/falso requerida.');const result=await query('UPDATE questions SET section=$1,type=$2,prompt=$3,options=$4,answer_key=$5,points=$6,position=$7 WHERE id=$8 RETURNING id,exam_id,section,type,prompt,options,points,position',[String(b.section||question.section),type,needText(b.prompt??question.prompt,'El enunciado',5000),b.options?JSON.stringify(b.options):null,key==null?null:JSON.stringify(key),['short','development'].includes(type)?2:1,Number(b.position??question.position),question.id]);await audit(req,'question_updated','question',question.id);return json(res,200,{question:result.rows[0]});
+    const b=await readBody(req),type=String(b.type||question.type),checked=validateQuestionInput(b,type);if(checked.error)return fail(res,400,checked.error);const {key,options}=checked;const result=await query('UPDATE questions SET section=$1,type=$2,prompt=$3,options=$4,answer_key=$5,points=$6,position=$7 WHERE id=$8 RETURNING id,exam_id,section,type,prompt,options,points,position',[String(b.section||question.section),type,needText(b.prompt??question.prompt,'El enunciado',5000),options==null?null:JSON.stringify(options),key==null?null:JSON.stringify(key),['short','development'].includes(type)?2:1,Number(b.position??question.position),question.id]);await audit(req,'question_updated','question',question.id);return json(res,200,{question:result.rows[0]});
   }
   const assignmentMatch=p.match(/^\/api\/exams\/([\da-f-]+)\/assignments$/i);
   if(assignmentMatch&&method==='POST'){
